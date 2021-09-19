@@ -2920,8 +2920,8 @@ namespace service_nodes
       REJECT_PROOF("timestamp is too far from now");
 
     for (auto const &min : MIN_UPTIME_PROOF_VERSIONS)
-      if (vers >= min.hardfork_revision && proof.snode_version < min.oxend)
-        REJECT_PROOF("v" << tools::join(".", min.oxend) << "+ oxend version is required for v" << +vers.first << "." << +vers.second << "+ network proofs");
+      if (vers >= min.hardfork_revision && proof.snode_version < min.lozzaxd)
+        REJECT_PROOF("v" << tools::join(".", min.lozzaxd) << "+ lozzaxd version is required for v" << +vers.first << "." << +vers.second << "+ network proofs");
 
     if (!debug_allow_local_ips && !epee::net_utils::is_ip_public(proof.public_ip))
       REJECT_PROOF("public_ip is not actually public");
@@ -3014,8 +3014,8 @@ namespace service_nodes
 
     for (auto const &min : MIN_UPTIME_PROOF_VERSIONS) {
       if (vers >= min.hardfork_revision) {
-        if (proof->version < min.oxend)
-          REJECT_PROOF("v" << tools::join(".", min.oxend) << "+ oxend version is required for v" << +vers.first << "." << +vers.second << "+ network proofs");
+        if (proof->version < min.lozzaxd)
+          REJECT_PROOF("v" << tools::join(".", min.lozzaxd) << "+ lozzaxd version is required for v" << +vers.first << "." << +vers.second << "+ network proofs");
         if (proof->lokinet_version < min.lokinet)
           REJECT_PROOF("v" << tools::join(".", min.lokinet) << "+ lokinet version is required for v" << +vers.first << "." << +vers.second << "+ network proofs");
         if (proof->storage_server_version < min.storage_server)

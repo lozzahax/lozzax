@@ -50,10 +50,10 @@ message(STATUS "CMake version ${CMAKE_VERSION}")
 # Has to be set before `project()`, and ignored on non-macos:
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.12 CACHE STRING "macOS deployment target (Apple clang only)")
 
-project(oxen
+project(lozzax
     VERSION 9.2.0
     LANGUAGES CXX C)
-set(OXEN_RELEASE_CODENAME "Audacious Aurochs")
+set(OXEN_RELEASE_CODENAME "free men")
 
 # String value to append to the full version string; this is intended to easily identify whether a
 # binary was build from the release or development branches.  This should be permanently set to an
@@ -298,7 +298,7 @@ if(NOT MANUAL_SUBMODULES)
 endif()
 
 # set this to 0 if per-block checkpoint needs to be disabled
-option(PER_BLOCK_CHECKPOINT "Enables per-block checkpointing" ON)
+option(PER_BLOCK_CHECKPOINT "Enables per-block checkpointing" 0)
 
 list(INSERT CMAKE_MODULE_PATH 0
   "${CMAKE_SOURCE_DIR}/cmake")

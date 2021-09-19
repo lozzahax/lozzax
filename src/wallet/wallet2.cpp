@@ -244,7 +244,7 @@ namespace {
 
 // Create on-demand to prevent static initialization order fiasco issues.
 struct options {
-  const command_line::arg_descriptor<std::string> daemon_address = {"daemon-address", tools::wallet2::tr("Use oxend RPC at [http://]<host>[:<port>]"), ""};
+  const command_line::arg_descriptor<std::string> daemon_address = {"daemon-address", tools::wallet2::tr("Use lozzaxd RPC at [http://]<host>[:<port>]"), ""};
   const command_line::arg_descriptor<std::string> daemon_login = {"daemon-login", tools::wallet2::tr("Specify username[:password] for daemon RPC client"), "", true};
   const command_line::arg_descriptor<std::string> proxy = {"proxy", tools::wallet2::tr("Use socks proxy at [socks4a://]<ip>:<port> for daemon connections"), "", true};
   const command_line::arg_descriptor<bool> trusted_daemon = {"trusted-daemon", tools::wallet2::tr("Enable commands which rely on a trusted daemon"), false};
@@ -1724,8 +1724,8 @@ void wallet2::scan_output(const cryptonote::transaction &tx, bool miner_tx, cons
       if (pool) reason = (blink) ? blink_reason : pool_reason;
 
       std::optional<epee::wipeable_string> pwd = m_callback->on_get_password(reason);
-      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming OXEN"));
-      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming OXEN"));
+      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming LOZZAX"));
+      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming LOZZAX"));
       decrypt_keys(*pwd);
       m_encrypt_keys_after_refresh = *pwd;
     }
@@ -2990,7 +2990,7 @@ bool wallet2::long_poll_pool_state()
   // How long we sleep (and thus prevent retrying the connection) if we get an error
   const auto error_sleep = m_long_poll_local ? 500ms : 3s;
   // How long we wait for a long poll response before timing out; we add a 5s buffer to the usual
-  // timeout to allow for network latency and oxend response time.
+  // timeout to allow for network latency and lozzaxd response time.
   m_long_poll_client.set_timeout(cryptonote::rpc::GET_TRANSACTION_POOL_HASHES_BIN::long_poll_timeout + 5s);
 
   using namespace cryptonote::rpc;
@@ -8197,7 +8197,7 @@ wallet2::stake_result wallet2::check_stake_allowed(const crypto::public_key& sn_
       result.msg.reserve(128);
       result.msg =  tr("You must contribute at least ");
       result.msg += print_money(min_contrib_total);
-      result.msg += tr(" oxen to become a contributor for this service node.");
+      result.msg += tr(" lozzax to become a contributor for this service node.");
       return result;
     }
   }
@@ -8206,7 +8206,7 @@ wallet2::stake_result wallet2::check_stake_allowed(const crypto::public_key& sn_
   {
     result.msg += tr("You may only contribute up to ");
     result.msg += print_money(max_contrib_total);
-    result.msg += tr(" more oxen to this service node. ");
+    result.msg += tr(" more lozzax to this service node. ");
     result.msg += tr("Reducing your stake from ");
     result.msg += print_money(amount);
     result.msg += tr(" to ");
@@ -8738,7 +8738,7 @@ static ons_prepared_args prepare_tx_extra_oxen_name_system_values(wallet2 const 
   ons_prepared_args result = {};
   if (priority == tools::tx_priority_blink)
   {
-    if (reason) *reason = "Can not request a blink TX for Oxen Name Service transactions";
+    if (reason) *reason = "Can not request a blink TX for Lozzax Name Service transactions";
     return {};
   }
 
@@ -10839,7 +10839,7 @@ std::vector<wallet2::pending_tx> wallet2::create_transactions_2(std::vector<cryp
   auto original_dsts = dsts;
   if (is_ons_tx)
   {
-    THROW_WALLET_EXCEPTION_IF(dsts.size() != 0, error::wallet_internal_error, "oxen name system txs must not have any destinations set, has: " + std::to_string(dsts.size()));
+    THROW_WALLET_EXCEPTION_IF(dsts.size() != 0, error::wallet_internal_error, "lozzax name system txs must not have any destinations set, has: " + std::to_string(dsts.size()));
     dsts.emplace_back(0, account_public_address{} /*address*/, false /*is_subaddress*/); // NOTE: Create a dummy dest that gets repurposed into the change output.
   }
 
@@ -14344,7 +14344,7 @@ epee::wipeable_string wallet2::decrypt_with_view_secret_key(std::string_view cip
   return decrypt(ciphertext, get_account().get_keys().m_view_secret_key, authenticated);
 }
 
-static constexpr auto uri_prefix = "oxen:"sv;
+static constexpr auto uri_prefix = "lozzax:"sv;
 
 //----------------------------------------------------------------------------------------------------
 std::string wallet2::make_uri(const std::string &address, const std::string &payment_id, uint64_t amount, const std::string &tx_description, const std::string &recipient_name, std::string &error) const

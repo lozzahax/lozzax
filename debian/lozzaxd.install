@@ -1,0 +1,8 @@
+/usr/bin/lozzaxd
+/usr/bin/oxen-sn-keys
+debian/oxen.conf /etc/oxen
+debian/oxen.conf /usr/share/lozzaxd
+debian/testnet.conf /etc/oxen
+debian/testnet.conf /usr/share/lozzaxd
+debian/ufw/lozzaxd /etc/ufw/applications.d
+debian/lozzaxd-download-lmdb /usr/bin

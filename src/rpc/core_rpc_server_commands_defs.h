@@ -803,8 +803,8 @@ namespace rpc {
   OXEN_RPC_DOC_INTROSPECT
   struct block_header_response
   {
-      uint8_t major_version;                  // The major version of the oxen protocol at this block height.
-      uint8_t minor_version;                  // The minor version of the oxen protocol at this block height.
+      uint8_t major_version;                  // The major version of the lozzax protocol at this block height.
+      uint8_t minor_version;                  // The minor version of the  lozzax protocol at this block height.
       uint64_t timestamp;                     // The unix time at which the block was recorded into the blockchain.
       std::string prev_hash;                  // The hash of the block immediately preceding this block in the chain.
       uint32_t nonce;                         // A cryptographic random one-time number used in mining a Loki block.
@@ -814,8 +814,8 @@ namespace rpc {
       std::string hash;                       // The hash of this block.
       difficulty_type difficulty;             // The strength of the Loki network based on mining power.
       difficulty_type cumulative_difficulty;  // The cumulative strength of the Loki network based on mining power.
-      uint64_t reward;                        // The amount of new generated in this block and rewarded to the miner, foundation and service Nodes. Note: 1 OXEN = 1e9 atomic units.
-      uint64_t miner_reward;                  // The amount of new generated in this block and rewarded to the miner. Note: 1 OXEN = 1e9 atomic units.
+      uint64_t reward;                        // The amount of new generated in this block and rewarded to the miner, foundation and service Nodes. Note: 1 LOZZAX = 1e9 atomic units.
+      uint64_t miner_reward;                  // The amount of new generated in this block and rewarded to the miner. Note: 1 LOZZAX = 1e9 atomic units.
       uint64_t block_size;                    // The block size in bytes.
       uint64_t block_weight;                  // The block weight in bytes.
       uint64_t num_txes;                      // Number of transactions in the block, not counting the coinbase tx.
@@ -1440,7 +1440,7 @@ namespace rpc {
       uint8_t version;          // The major block version for the fork.
       bool enabled;             // Indicates whether hard fork is enforced (that is, at or above the requested hardfork)
       std::optional<uint64_t> earliest_height; // Block height at which hard fork will be enabled.
-      std::optional<uint64_t> last_height; // The last block height at which this hard fork will be active; will be omitted if this oxend is not aware of any future hard fork.
+      std::optional<uint64_t> last_height; // The last block height at which this hard fork will be active; will be omitted if this lozzaxd is not aware of any future hard fork.
       std::string status;       // General RPC error code. "OK" means everything looks good.
       bool untrusted;           // States if the result is obtained using the bootstrap mode, and is therefore not trusted (`true`), or when the daemon is fully synced (`false`).
 
@@ -1618,7 +1618,7 @@ namespace rpc {
       std::string status;       // General RPC error code. "OK" means everything looks good.
       uint64_t emission_amount; // Amount of coinbase reward in atomic units.
       uint64_t fee_amount;      // Amount of fees in atomic units.
-      uint64_t burn_amount;      // Amount of burnt oxen.
+      uint64_t burn_amount;      // Amount of burnt lozzax.
 
       KV_MAP_SERIALIZABLE
     };
@@ -2521,7 +2521,7 @@ namespace rpc {
   // information use ONS_NAMES_TO_OWNERS instead.
   //
   // Technical details: the returned value is encrypted using the name itself so that neither this
-  // oxend responding to the RPC request nor any other blockchain observers can (easily) obtain the
+  // lozzaxd responding to the RPC request nor any other blockchain observers can (easily) obtain the
   // name of registered addresses or the registration details.  Thus, from a client's point of view,
   // resolving an ONS record involves:
   //

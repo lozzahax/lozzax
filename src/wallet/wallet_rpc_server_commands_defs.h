@@ -1685,7 +1685,7 @@ namespace tools::wallet_rpc {
   };
 
   OXEN_RPC_DOC_INTROSPECT
-  // Create a new wallet. You need to have set the argument "'--wallet-dir" when launching oxen-wallet-rpc to make this work.
+  // Create a new wallet. You need to have set the argument "'--wallet-dir" when launching lozzax-wallet-rpc to make this work.
   struct CREATE_WALLET : RPC_COMMAND
   {
     static constexpr auto names() { return NAMES("create_wallet"); }
@@ -1706,7 +1706,7 @@ namespace tools::wallet_rpc {
   };
 
   OXEN_RPC_DOC_INTROSPECT
-  // Open a wallet. You need to have set the argument "--wallet-dir" when launching oxen-wallet-rpc to make this work.
+  // Open a wallet. You need to have set the argument "--wallet-dir" when launching lozzax-wallet-rpc to make this work.
   // The wallet rpc executable may only open wallet files within the same directory as wallet-dir, otherwise use the
   // "--wallet-file" flag to open specific wallets.
   struct OPEN_WALLET : RPC_COMMAND
@@ -2234,8 +2234,8 @@ For more information on updating and signing see the ONS_UPDATE_MAPPING document
       std::string        type;            // The mapping type: "session", "lokinet", "lokinet_2y", "lokinet_5y", "lokinet_10y", "wallet".
       std::string        owner;           // (Optional): The ed25519 public key or wallet address that has authority to update the mapping.
       std::string        backup_owner;    // (Optional): The secondary, backup public key that has authority to update the mapping.
-      std::string        name;            // The name to purchase via Oxen Name Service
-      std::string        value;           // The value that the name maps to via Oxen Name Service, (i.e. For Session: [display name->session public key],  for wallets: [name->wallet address], for Lokinet: [name->domain name]).
+      std::string        name;            // The name to purchase via Lozzax Name Service
+      std::string        value;           // The value that the name maps to via Lozzax Name Service, (i.e. For Session: [display name->session public key],  for wallets: [name->wallet address], for Lokinet: [name->domain name]).
 
       uint32_t           account_index;   // (Optional) Transfer from this account index. (Defaults to 0)
       std::set<uint32_t> subaddr_indices; // (Optional) Transfer from this set of subaddresses. (Defaults to 0)
@@ -2357,8 +2357,8 @@ This command is only required if the open wallet is one of the owners of a ONS r
     struct request
     {
       std::string type;  // The mapping type, currently we support "session", "lokinet" and "wallet" mappings.
-      std::string name;  // The desired name to update via Oxen Name Service
-      std::string encrypted_value; // (Optional): The new encrypted value that the name maps to via Oxen Name Service. If not specified or given the empty string "", then the mapping's value remains unchanged.
+      std::string name;  // The desired name to update via Lozzax Name Service
+      std::string encrypted_value; // (Optional): The new encrypted value that the name maps to via Lozzax Name Service. If not specified or given the empty string "", then the mapping's value remains unchanged.
       std::string owner;     // (Optional): The new owner of the mapping. If not specified or given the empty string "", then the mapping's owner remains unchanged.
       std::string backup_owner; // (Optional): The new backup owner of the mapping. If not specified or given the empty string "", then the mapping's backup owner remains unchanged.
       uint32_t account_index; // (Optional) Use this wallet's subaddress account for generating the signature

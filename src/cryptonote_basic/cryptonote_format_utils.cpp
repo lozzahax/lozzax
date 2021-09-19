@@ -1059,13 +1059,13 @@ namespace cryptonote
     switch (decimal_point)
     {
       case 9:
-        return "oxen";
+        return "lozzax";
       case 6:
-        return "megarok";
+        return "megazax";
       case 3:
-        return "kilorok";
+        return "kilozax";
       case 0:
-        return "rok";
+        return "zax";
       default:
         ASSERT_MES_AND_THROW("Invalid decimal point specification: " << decimal_point);
     }

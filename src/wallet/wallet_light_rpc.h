@@ -81,8 +81,8 @@ namespace light_rpc
         uint64_t id;                            // The transaction identifier.
         std::string hash;                       // The hash of this transaction.
         uint64_t timestamp;                     // The unix time at which the block was recorded into the blockchain.
-        uint64_t total_received;                // Total Loki received in atomic units.
-        uint64_t total_sent;                    // Total oxen sent in atomic units.
+        uint64_t total_received;                // Total lozzax received in atomic units.
+        uint64_t total_sent;                    // Total lozzax sent in atomic units.
         uint64_t unlock_time;                   // Unlock time in blocks.
         uint64_t height;                        // Block height transaction was made.
         std::list<spent_output> spent_outputs;  // List of spent outputs.

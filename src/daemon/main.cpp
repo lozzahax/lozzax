@@ -125,16 +125,16 @@ int main(int argc, char const * argv[])
 
     if (command_line::get_arg(vm, command_line::arg_help))
     {
-      std::cout << CYAN << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << RESET << "\n\n";
+      std::cout << CYAN << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << RESET << "\n\n";
       std::cout << "Usage: " + std::string{argv[0]} + " [options|settings] [daemon_command...]" << std::endl << std::endl;
       std::cout << visible_options << std::endl;
       return 0;
     }
 
-    // Oxen Version
+    // Lozzax Version
     if (command_line::get_arg(vm, command_line::arg_version))
     {
-      std::cout << CYAN << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << RESET << "\n\n";
+      std::cout << CYAN << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << RESET << "\n\n";
       return 0;
     }
 
@@ -312,7 +312,7 @@ int main(int argc, char const * argv[])
 
     // logging is now set up
     // FIXME: only print this when starting up as a daemon but not when running rpc commands
-    MGINFO_CYAN("Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")");
+    MGINFO_CYAN("Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")");
 
     // If there are positional options, we're running a daemon command
     {
@@ -335,7 +335,7 @@ int main(int argc, char const * argv[])
         } else {
           rpc_addr = command_line::get_arg(vm, cryptonote::rpc::http_server::arg_rpc_admin)[0];
           if (rpc_addr == "none")
-            throw std::runtime_error{"Cannot invoke oxend command: --rpc-admin is disabled"};
+            throw std::runtime_error{"Cannot invoke lozzaxd command: --rpc-admin is disabled"};
         }
 
         {
@@ -351,7 +351,7 @@ int main(int argc, char const * argv[])
 
     MINFO("Moving from main() into the daemonize now.");
 
-    return daemonizer::daemonize<daemonize::daemon>("Oxen Daemon", argc, argv, std::move(vm))
+    return daemonizer::daemonize<daemonize::daemon>("Lozzax Daemon", argc, argv, std::move(vm))
         ? 0 : 1;
   }
   catch (std::exception const & ex)

@@ -132,7 +132,7 @@ namespace wallet_args
     command_line::add_arg(desc_params, integration_test::arg_pipe_name);
 #endif
 
-    i18n_set_language("translations", "oxen", lang);
+    i18n_set_language("translations", "lozzax", lang);
 
     po::options_description desc_all, desc_visible;
     desc_visible.add(desc_general).add(desc_params);
@@ -153,8 +153,8 @@ namespace wallet_args
 
       if (command_line::get_arg(vm, command_line::arg_help))
       {
-        Print(print) << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")\n";
-        Print(print) << wallet_args::tr("This is the command line oxen wallet. It needs to connect to a oxen\n"
+        Print(print) << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")\n";
+        Print(print) << wallet_args::tr("This is the command line lozzax wallet. It needs to connect to a lozzax\n"
 												  "daemon to work correctly.") << "\n";
         Print(print) << wallet_args::tr("Usage:") << "\n  " << usage;
         Print(print) << desc_visible;
@@ -163,7 +163,7 @@ namespace wallet_args
       }
       else if (command_line::get_arg(vm, command_line::arg_version))
       {
-        Print(print) << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
+        Print(print) << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
         should_terminate = true;
         return true;
       }
@@ -215,7 +215,7 @@ namespace wallet_args
     if (!command_line::is_arg_defaulted(vm, arg_max_concurrency))
       tools::set_max_concurrency(command_line::get_arg(vm, arg_max_concurrency));
 
-    Print(print) << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
+    Print(print) << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
 
     if (!command_line::is_arg_defaulted(vm, arg_log_level))
       MINFO("Setting log level = " << command_line::get_arg(vm, arg_log_level));

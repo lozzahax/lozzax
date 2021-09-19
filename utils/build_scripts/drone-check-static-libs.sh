@@ -6,7 +6,7 @@
 set -o errexit
 
 anybad=
-for bin in oxend oxen-{wallet-{cli,rpc},gen-trusted-multisig,blockchain-{ancestry,depth,export,import,mark-spent-outputs,stats,usage}}; do
+for bin in lozzaxd oxen-{wallet-{cli,rpc},gen-trusted-multisig,blockchain-{ancestry,depth,export,import,mark-spent-outputs,stats,usage}}; do
     bad=
     if [ "$DRONE_STAGE_OS" == "darwin" ]; then
         if otool -L bin/$bin | grep -Ev '^bin/'$bin':|^\t(/usr/lib/libSystem\.|/usr/lib/libc\+\+\.|/System/Library/Frameworks/(CoreFoundation|IOKit|Security))'; then

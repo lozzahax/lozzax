@@ -234,7 +234,7 @@ namespace cryptonote
     "block-rate-notify"
   , "Run a program when the block rate undergoes large fluctuations. This might "
     "be a sign of large amounts of hash rate going on and off the Loki network, "
-    "or could be a sign that oxend is not properly synchronizing with the network. %t will be replaced "
+    "or could be a sign that lozzaxd is not properly synchronizing with the network. %t will be replaced "
     "by the number of minutes for the observation window, %b by the number of "
     "blocks observed within that window, and %e by the number of blocks that was "
     "expected in that window."
@@ -428,7 +428,7 @@ namespace cryptonote
 
       if (!args_okay) {
         MERROR("IMPORTANT: One or more required service node-related configuration settings/options were omitted or invalid; "
-                << "please fix them and restart oxend.");
+                << "please fix them and restart lozzaxd.");
         return false;
       }
     }

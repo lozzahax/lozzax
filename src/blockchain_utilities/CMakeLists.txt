@@ -37,7 +37,7 @@ target_link_libraries(blockchain_tools_common_libs INTERFACE
     extra)
 
 
-oxen_add_executable(blockchain_import "oxen-blockchain-import"
+oxen_add_executable(blockchain_import "lozzax-import"
   blockchain_import.cpp
   bootstrap_file.cpp
   blocksdat_file.cpp
@@ -51,7 +51,7 @@ if(ARCH_WIDTH)
   target_compile_definitions(blockchain_import PRIVATE ARCH_WIDTH=${ARCH_WIDTH})
 endif()
 
-oxen_add_executable(blockchain_export "oxen-blockchain-export"
+oxen_add_executable(blockchain_export "lozzax-export"
   blockchain_export.cpp
   bootstrap_file.cpp
   blocksdat_file.cpp
@@ -59,7 +59,7 @@ oxen_add_executable(blockchain_export "oxen-blockchain-export"
 target_link_libraries(blockchain_export PRIVATE blockchain_tools_common_libs)
 
 
-oxen_add_executable(blockchain_blackball "oxen-blockchain-mark-spent-outputs"
+oxen_add_executable(blockchain_blackball "lozzax-mark-spent-outputs"
   blockchain_blackball.cpp
   )
 
@@ -69,28 +69,28 @@ target_link_libraries(blockchain_blackball
     wallet)
 
 
-oxen_add_executable(blockchain_usage "oxen-blockchain-usage"
+oxen_add_executable(blockchain_usage "lozzax-usage"
   blockchain_usage.cpp
   )
 target_link_libraries(blockchain_usage PRIVATE blockchain_tools_common_libs)
 
-oxen_add_executable(blockchain_ancestry "oxen-blockchain-ancestry"
+oxen_add_executable(blockchain_ancestry "lozzax-ancestry"
   blockchain_ancestry.cpp
   )
 target_link_libraries(blockchain_ancestry PRIVATE blockchain_tools_common_libs)
 
-oxen_add_executable(blockchain_depth "oxen-blockchain-depth"
+oxen_add_executable(blockchain_depth "lozzax-depth"
   blockchain_depth.cpp
   )
 target_link_libraries(blockchain_depth PRIVATE blockchain_tools_common_libs)
 
-oxen_add_executable(blockchain_stats "oxen-blockchain-stats"
+oxen_add_executable(blockchain_stats "lozzax-stats"
   blockchain_stats.cpp
   )
 target_link_libraries(blockchain_stats PRIVATE blockchain_tools_common_libs)
 
-# TODO(oxen): Blockchain pruning not supported in Oxen yet
-# oxen_add_executable(blockchain_prune_known_spent_data "oxen-blockchain-prune-known-spent-data"
+# TODO(oxen): Blockchain pruning not supported in Lozzax yet
+# oxen_add_executable(blockchain_prune_known_spent_data "lozzax-prune-known-spent-data"
 #   blockchain_prune_known_spent_data.cpp
 #   )
 # 
@@ -99,7 +99,7 @@ target_link_libraries(blockchain_stats PRIVATE blockchain_tools_common_libs)
 #     blockchain_tools_common_libs
 #     p2p)
 # 
-# oxen_add_executable(blockchain_prune "oxen-blockchain-prune"
+# oxen_add_executable(blockchain_prune "lozzax-prune"
 #   blockchain_prune.cpp
 #   )
 # 
@@ -109,8 +109,8 @@ target_link_libraries(blockchain_stats PRIVATE blockchain_tools_common_libs)
 #     p2p)
 
 if (TARGET sodium_vendor OR NOT SODIUM_VERSION VERSION_LESS 1.0.17)
-    oxen_add_executable(sn_key_tool "oxen-sn-keys" sn_key_tool.cpp)
+    oxen_add_executable(sn_key_tool "lozzax-sn-keys" sn_key_tool.cpp)
     target_link_libraries(sn_key_tool PRIVATE sodium oxenmq filesystem)
 else()
-    message(STATUS "Not building oxen-sn-keys tool (requires libsodium >= 1.0.17)")
+    message(STATUS "Not building lozzax-sn-keys tool (requires libsodium >= 1.0.17)")
 endif()

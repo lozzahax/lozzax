@@ -99,7 +99,7 @@ You can install these using:
 	$ sudo curl -so /etc/apt/trusted.gpg.d/oxen.gpg https://deb.oxen.io/pub.gpg
 	$ echo "deb https://deb.oxen.io $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/oxen.list
 	$ sudo apt update
-	$ sudo apt install oxend
+	$ sudo apt install lozzaxd
 
 if you want to build a dev build you can do the following after installing the dependancies above:
 
@@ -115,7 +115,7 @@ if you want to build a dev build you can do the following after installing the d
 
 * Add `PATH="$PATH:$HOME/oxen-core/build/bin"` to `.profile`
 
-* Run Oxen with `oxend --detach`
+* Run Oxen with `lozzaxd --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -371,17 +371,17 @@ You can also build a docker package using:
 * The build needs 3 GB space.
 * Wait one hour or more. For docker, the collect_from_docker_container.sh script will automate downloading the binaries from the docker container.
 
-## Running oxend
+## Running lozzaxd
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in
 foreground:
 
 ```bash
-./bin/oxend
+./bin/lozzaxd
 ```
 
-To list all available options, run `./bin/oxend --help`.  Options can be
+To list all available options, run `./bin/lozzaxd --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -390,18 +390,18 @@ of the argument without the leading dashes, for example `log-level=1`.
 To run in background:
 
 ```bash
-./bin/oxend --log-file oxend.log --detach
+./bin/lozzaxd --log-file lozzaxd.log --detach
 ```
 
 To run as a systemd service, copy
-[oxend.service](utils/systemd/oxend.service) to `/etc/systemd/system/` and
-[oxend.conf](utils/conf/oxend.conf) to `/etc/`. The [example
-service](utils/systemd/oxend.service) assumes that the user `oxen` exists
+[lozzaxd.service](utils/systemd/lozzaxd.service) to `/etc/systemd/system/` and
+[lozzaxd.conf](utils/conf/lozzaxd.conf) to `/etc/`. The [example
+service](utils/systemd/lozzaxd.service) assumes that the user `oxen` exists
 and its home is the data directory specified in the [example
-config](utils/conf/oxend.conf).
+config](utils/conf/lozzaxd.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-oxen-wallet-cli, and possibly oxend, if you get crashes refreshing.
+oxen-wallet-cli, and possibly lozzaxd, if you get crashes refreshing.
 
 ## Internationalization
 
@@ -419,28 +419,28 @@ While Oxen isn't made to integrate with Tor, it can be used wrapped with torsock
 setting the following configuration parameters and environment variables:
 
 * `--p2p-bind-ip 127.0.0.1` on the command line or `p2p-bind-ip=127.0.0.1` in
-  oxend.conf to disable listening for connections on external interfaces.
-* `--no-igd` on the command line or `no-igd=1` in oxend.conf to disable IGD
+  lozzaxd.conf to disable listening for connections on external interfaces.
+* `--no-igd` on the command line or `no-igd=1` in lozzaxd.conf to disable IGD
   (UPnP port forwarding negotiation), which is pointless with Tor.
 * `DNS_PUBLIC=tcp` or `DNS_PUBLIC=tcp://x.x.x.x` where x.x.x.x is the IP of the
   desired DNS server, for DNS requests to go over TCP, so that they are routed
-  through Tor. When IP is not specified, oxend uses the default list of
+  through Tor. When IP is not specified, lozzaxd uses the default list of
   servers defined in [src/common/dns_utils.cpp](src/common/dns_utils.cpp).
-* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow oxend to bind to interfaces
+* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow lozzaxd to bind to interfaces
    to accept connections from the wallet. On some Linux systems, torsocks
    allows binding to localhost by default, so setting this variable is only
    necessary to allow binding to local LAN/VPN interfaces to allow wallets to
    connect from remote hosts. On other systems, it may be needed for local wallets
    as well.
 * Do NOT pass `--detach` when running through torsocks with systemd, (see
-  [utils/systemd/oxend.service](utils/systemd/oxend.service) for details).
+  [utils/systemd/lozzaxd.service](utils/systemd/lozzaxd.service) for details).
 * If you use the wallet with a Tor daemon via the loopback IP (eg, 127.0.0.1:9050),
   then use `--untrusted-daemon` unless it is your own hidden service.
 
-Example command line to start oxend through Tor:
+Example command line to start lozzaxd through Tor:
 
 ```bash
-DNS_PUBLIC=tcp torsocks oxend --p2p-bind-ip 127.0.0.1 --no-igd
+DNS_PUBLIC=tcp torsocks lozzaxd --p2p-bind-ip 127.0.0.1 --no-igd
 ```
 
 ### Using Tor on Tails
@@ -451,7 +451,7 @@ allow inbound connections. Full example:
 
 ```bash
 sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 22023 -j ACCEPT
-DNS_PUBLIC=tcp torsocks ./oxend --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
+DNS_PUBLIC=tcp torsocks ./lozzaxd --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
     --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain
 ```
 
@@ -470,7 +470,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```bash
-gdb /path/to/oxend `pidof oxend`
+gdb /path/to/lozzaxd `pidof lozzaxd`
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -483,12 +483,12 @@ Enter `echo core | sudo tee /proc/sys/kernel/core_pattern` to stop cores from be
 
 Run the build.
 
-When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as oxend. It may be named just `core`, or `core.xxxx` with numbers appended.
+When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as lozzaxd. It may be named just `core`, or `core.xxxx` with numbers appended.
 
 You can now analyse this core dump with `gdb` as follows:
 
 ```bash
-gdb /path/to/oxend /path/to/dumpfile`
+gdb /path/to/lozzaxd /path/to/dumpfile`
 ```
 
 Print the stack trace with `bt`
@@ -501,11 +501,11 @@ coredumpctl -1 gdb
 
 #### To run Oxen within gdb:
 
-Type `gdb /path/to/oxend`
+Type `gdb /path/to/lozzaxd`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run oxend
+Type `run` to run lozzaxd
 
 ### Analysing memory corruption
 
@@ -523,7 +523,7 @@ You can then run the oxen tools normally. Performance will typically halve.
 
 #### valgrind
 
-Install valgrind and run as `valgrind /path/to/oxend`. It will be very slow.
+Install valgrind and run as `valgrind /path/to/lozzaxd`. It will be very slow.
 
 ### LMDB
 
@@ -549,8 +549,8 @@ These records are dumped as hex data, where the first line is the key and the se
 
 Because of the nature of the socket-based protocols that drive Oxen, certain protocol weaknesses are somewhat unavoidable at this time. While these weaknesses can theoretically be fully mitigated, the effort required (the means) may not justify the ends. As such, please consider taking the following precautions if you are a Oxen node operator:
 
-- Run `oxend` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `oxend` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your `oxend` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
-- If you plan on hosting a public "remote" node, start `oxend` with `--restricted-rpc`. This is a must.
+- Run `lozzaxd` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `lozzaxd` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your `lozzaxd` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
+- If you plan on hosting a public "remote" node, start `lozzaxd` with `--restricted-rpc`. This is a must.
 
 ### Blockchain-based
 

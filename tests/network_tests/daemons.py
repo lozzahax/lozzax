@@ -126,7 +126,7 @@ class Daemon(RPCDaemon):
     base_args = ('--dev-allow-local-ips', '--fixed-difficulty=1', '--regtest', '--non-interactive')
 
     def __init__(self, *,
-            oxend='oxend',
+            lozzaxd='lozzaxd',
             listen_ip=None, p2p_port=None, rpc_port=None, zmq_port=None, qnet_port=None, ss_port=None,
             name=None,
             datadir=None,
@@ -135,7 +135,7 @@ class Daemon(RPCDaemon):
             peers=()):
         self.rpc_port = rpc_port or next_port()
         if name is None:
-            name = 'oxend@{}'.format(self.rpc_port)
+            name = 'lozzaxd@{}'.format(self.rpc_port)
         super().__init__(name)
         self.listen_ip = listen_ip or LISTEN_IP
         self.p2p_port = p2p_port or next_port()
@@ -144,7 +144,7 @@ class Daemon(RPCDaemon):
         self.ss_port = ss_port or next_port()
         self.peers = []
 
-        self.args = [oxend] + list(self.__class__.base_args)
+        self.args = [lozzaxd] + list(self.__class__.base_args)
         self.args += (
                 '--data-dir={}/oxen-{}-{}'.format(datadir or '.', self.listen_ip, self.rpc_port),
                 '--log-level={}'.format(log_level),
@@ -212,7 +212,7 @@ class Daemon(RPCDaemon):
 
 
     def ping(self, *, storage=True, lokinet=True):
-        """Sends fake storage server and lokinet pings to the running oxend"""
+        """Sends fake storage server and lokinet pings to the running lozzaxd"""
         if storage:
             self.json_rpc("storage_server_ping", { "version_major": 9, "version_minor": 9, "version_patch": 9 })
         if lokinet:

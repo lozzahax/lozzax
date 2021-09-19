@@ -73,7 +73,7 @@ namespace
   const command_line::arg_descriptor<std::string> arg_wallet_dir = {"wallet-dir", "Directory for newly created wallets"};
   const command_line::arg_descriptor<bool> arg_prompt_for_password = {"prompt-for-password", "Prompts for password when not provided", false};
 
-  constexpr const char default_rpc_username[] = "oxen";
+  constexpr const char default_rpc_username[] = "lozzax";
 
   std::optional<tools::password_container> password_prompter(const char *prompt, bool verify)
   {
@@ -500,7 +500,7 @@ namespace tools
 
     m_restricted = command_line::get_arg(m_vm, arg_restricted);
 
-    m_server_header = "oxen-wallet-rpc/"s + (m_restricted ? std::to_string(OXEN_VERSION[0]) : std::string{OXEN_VERSION_STR});
+    m_server_header = "lozzax-wallet-rpc/"s + (m_restricted ? std::to_string(OXEN_VERSION[0]) : std::string{OXEN_VERSION_STR});
 
     m_cors = {rpc_config.access_control_origins.begin(), rpc_config.access_control_origins.end()};
 
@@ -546,7 +546,7 @@ namespace tools
           epee::string_encoding::base64_encode(rand_128bit.data(), rand_128bit.size())
         );
 
-        std::string temp = "oxen-wallet-rpc." + std::to_string(port) + ".login";
+        std::string temp = "lozzax-wallet-rpc." + std::to_string(port) + ".login";
         rpc_login_file = tools::private_file::create(temp);
         if (!rpc_login_file.handle())
         {
@@ -882,7 +882,7 @@ namespace tools
             if (!dnssec_valid)
               throw wallet_rpc_error{error_code::WRONG_ADDRESS, "Invalid DNSSEC for "s + std::string{url}};
             if (addresses.empty())
-              throw wallet_rpc_error{error_code::WRONG_ADDRESS, "No Oxen address found at "s + std::string{url}};
+              throw wallet_rpc_error{error_code::WRONG_ADDRESS, "No Lozzax address found at "s + std::string{url}};
             return addresses[0];
           }))
           throw wallet_rpc_error{error_code::WRONG_ADDRESS, "Invalid address: "s + std::string{addr_or_url}};
@@ -897,7 +897,7 @@ namespace tools
           if (!dnssec_valid)
             throw wallet_rpc_error{error_code::WRONG_ADDRESS, "Invalid DNSSEC for "s + std::string{url}};
           if (addresses.empty())
-            throw wallet_rpc_error{error_code::WRONG_ADDRESS, "No Oxen address found at "s + std::string{url}};
+            throw wallet_rpc_error{error_code::WRONG_ADDRESS, "No Lozzax address found at "s + std::string{url}};
           return addresses[0];
         }))
         throw wallet_rpc_error{error_code::WRONG_ADDRESS, "Invalid address: "s + std::string{addr_or_url}};
@@ -2993,7 +2993,7 @@ namespace {
   //------------------------------------------------------------------------------------------------------------------------------
 
   //
-  // Oxen
+  // Lozzax
   //
   STAKE::response wallet_rpc_server::invoke(STAKE::request&& req)
   {
@@ -3297,7 +3297,7 @@ namespace {
 
     uint64_t curr_height = req.include_expired ? m_wallet->get_blockchain_current_height() : 0;
 
-    // Query oxend for the full record info
+    // Query lozzaxd for the full record info
     for (auto it = res.known_names.begin(); it != res.known_names.end(); )
     {
       const size_t num_entries = std::distance(it, res.known_names.end());
@@ -3606,12 +3606,12 @@ int main(int argc, char **argv)
 
   auto [vm, should_terminate] = wallet_args::main(
     argc, argv,
-    "oxen-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
-    tools::wallet_rpc_server::tr("This is the RPC oxen wallet. It needs to connect to a oxen\ndaemon to work correctly."),
+    "lozzax-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
+    tools::wallet_rpc_server::tr("This is the RPC lozzax wallet. It needs to connect to a lozzax\ndaemon to work correctly."),
     desc_params, hidden_params,
     po::positional_options_description(),
     [](const std::string &s, bool emphasis){ epee::set_console_color(emphasis ? epee::console_color_white : epee::console_color_default, emphasis); std::cout << s << std::endl; if (emphasis) epee::reset_console_color(); },
-    "oxen-wallet-rpc.log",
+    "lozzax-wallet-rpc.log",
     true
   );
   if (!vm)

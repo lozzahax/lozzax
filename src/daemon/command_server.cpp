@@ -511,7 +511,7 @@ bool command_server::help(const std::vector<std::string>& args)
 std::string command_server::get_commands_str()
 {
   std::stringstream ss;
-  ss << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << std::endl;
+  ss << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")" << std::endl;
   ss << "Commands:\n";
   m_command_lookup.for_each([&ss] (const std::string&, const std::string& usage, const std::string&) {
       ss << "  " << usage << "\n"; });
