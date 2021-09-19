@@ -30,12 +30,12 @@ else:
         r = requests.post(oxenrpc, json={"jsonrpc":"2.0", "id":0, "method":"get_service_node_privkey"}).json()
         if "result" in r and "service_node_x25519_privkey" in r["result"]:
             x_key = PrivateKey(r["result"]["service_node_x25519_privkey"], encoder=nacl.encoding.HexEncoder)
-            print("Loaded x25519 keys (pub: {}) from oxend @ {}".format(hexstr(x_key.public_key), sys.argv[1]))
+            print("Loaded x25519 keys (pub: {}) from lozzaxd @ {}".format(hexstr(x_key.public_key), sys.argv[1]))
         else:
             x_key = PrivateKey.generate()
-            print("Generated x25519 key {} (oxend @ {} did not return SN privkeys)".format(hexstr(x_key.public_key), sys.argv[1]))
+            print("Generated x25519 key {} (lozzaxd @ {} did not return SN privkeys)".format(hexstr(x_key.public_key), sys.argv[1]))
     else:
-        print("Error: {} does not look like a valid oxend RPC host:port value".format(sys.argv[1]), sys.stderr)
+        print("Error: {} does not look like a valid lozzaxd RPC host:port value".format(sys.argv[1]), sys.stderr)
         badargs = True
 
     for pk in sys.argv[2:]:

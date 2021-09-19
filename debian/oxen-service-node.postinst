@@ -2,7 +2,7 @@
 
 set -e
 
-restart_oxend=
+restart_lozzaxd=
 
 if [ "$1" = configure ]; then
     . /usr/share/debconf/confmodule
@@ -19,8 +19,8 @@ if [ "$1" = configure ]; then
             cp /etc/oxen/$c ${tmpdir}/$c
         elif [ -f "/etc/oxen/$c.no-service-node" ]; then
             cp /etc/oxen/$c.no-service-node ${tmpdir}/$c
-        elif [ -f "/usr/share/oxend/$c" ]; then
-            cp /usr/share/oxend/$c ${tmpdir}/$c
+        elif [ -f "/usr/share/lozzaxd/$c" ]; then
+            cp /usr/share/lozzaxd/$c ${tmpdir}/$c
         else
             echo "Internal error: cannot find an existing $c to update!"
             false
@@ -54,9 +54,9 @@ if [ "$1" = configure ]; then
         ucfr oxen-service-node /etc/oxen/$conf
     done
 
-    # If we updated config files then we need to make sure oxend restarts below.
+    # If we updated config files then we need to make sure lozzaxd restarts below.
     if [ "$(md5sum /etc/oxen/{oxen,testnet}.conf 2>/dev/null || true)" != "$orig_main_md5" ]; then
-        restart_oxend=1
+        restart_lozzaxd=1
     fi
 fi
 
@@ -64,7 +64,7 @@ fi
 
 # Debhelper doesn't do this here because the oxen-service-node package doesn't contain the service files:
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
-    if [ -d /run/systemd/system ] && [ -n "$restart_oxend" ]; then
+    if [ -d /run/systemd/system ] && [ -n "$restart_lozzaxd" ]; then
         systemctl --system daemon-reload >/dev/null || true
         for s in oxen-node oxen-testnet-node; do
             deb-systemd-invoke restart $s.service || true

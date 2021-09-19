@@ -1,4 +1,4 @@
-# Oxen Blockchain Utilities
+# Lozzax Blockchain Utilities
 
 Copyright (c) 2014-2019, The Monero Project
 Copyright (c)      2018, The Loki Project
@@ -13,16 +13,16 @@ See also each utility's "--help" option.
 
 ### Export an existing blockchain database
 
-`$ oxen-blockchain-export`
+`$ lozzax-export`
 
 This loads the existing blockchain and exports it to `$OXEN_DATA_DIR/export/blockchain.raw`
 
 ### Import the exported file
 
-`$ oxen-blockchain-import`
+`$ lozzax-import`
 
 This imports blocks from `$OXEN_DATA_DIR/export/blockchain.raw` (exported using the
-`oxen-blockchain-export` tool as described above) into the current database.
+`lozzax-export` tool as described above) into the current database.
 
 Defaults: `--batch on`, `--batch size 20000`, `--verify on`
 
@@ -31,14 +31,14 @@ Batch size refers to number of blocks and can be adjusted for performance based 
 Verification should only be turned off if importing from a trusted blockchain.
 
 If you encounter an error like "resizing not supported in batch mode", you can just re-run
-the `oxen-blockchain-import` command again, and it will restart from where it left off.
+the `lozzax-import` command again, and it will restart from where it left off.
 
 ```bash
 ## use default settings to import blockchain.raw into database
-$ oxen-blockchain-import
+$ lozzax-import
 
 ## fast import with large batch size, database mode "fastest", verification off
-$ oxen-blockchain-import --batch-size 20000 --database lmdb#fastest --verify off
+$ lozzax-import --batch-size 20000 --database lmdb#fastest --verify off
 
 ```
 
@@ -81,9 +81,9 @@ LMDB flags (more than one may be specified):
 ## Examples:
 
 ```bash
-$ oxen-blockchain-import --database lmdb#fastest
+$ lozzax-import --database lmdb#fastest
 
-$ oxen-blockchain-import --database lmdb#nosync
+$ lozzax-import --database lmdb#nosync
 
-$ oxen-blockchain-import --database lmdb#nosync,nometasync
+$ lozzax-import --database lmdb#nosync,nometasync
 ```

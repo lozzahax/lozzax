@@ -39,7 +39,7 @@
 #include "oxen_economy.h"
 #include <chrono>
 #ifdef _WIN32
- #define __STDC_FORMAT_MACROS // NOTE(oxen): Explicitly define the PRIu64 macro on Mingw
+ #define __STDC_FORMAT_MACROS // NOTE(lozzax): Explicitly define the PRIu64 macro on Mingw
 #endif
 
 #include <locale.h>
@@ -248,7 +248,7 @@ namespace
   const char* USAGE_HELP("help [<command>]");
 
   //
-  // Oxen
+  // Lozzax
   //
   const char* USAGE_REGISTER_SERVICE_NODE("register_service_node [index=<N1>[,<N2>,...]] [<priority>] <operator cut> <address1> <fraction1> [<address2> <fraction2> [...]] <expiration timestamp> <pubkey> <signature>");
   const char* USAGE_STAKE("stake [index=<N1>[,<N2>,...]] [<priority>] <service node pubkey> <amount|percent%>");
@@ -322,7 +322,7 @@ namespace
   std::optional<tools::password_container> password_prompter(const char *prompt, bool verify)
   {
 #if defined(OXEN_ENABLE_INTEGRATION_TEST_HOOKS)
-    std::cout << prompt << ": NOTE(oxen): Passwords not supported, defaulting to empty password";
+    std::cout << prompt << ": NOTE(lozzax): Passwords not supported, defaulting to empty password";
     integration_test::write_buffered_stdout();
     tools::password_container pwd_container(std::string(""));
 #else
@@ -468,7 +468,7 @@ namespace
     std::stringstream prompt;
     prompt << sw::tr("For URL: ") << url
            << ", " << dnssec_str << std::endl
-           << sw::tr(" Oxen Address = ") << addresses[0]
+           << sw::tr(" Lozzax Address = ") << addresses[0]
            << std::endl
            << sw::tr("Is this OK?")
     ;
@@ -713,9 +713,9 @@ bool simple_wallet::spendkey(const std::vector<std::string> &args/* = std::vecto
   } else {
     SCOPED_WALLET_UNLOCK();
 
-    warn_msg_writer() << tr("NEVER give your Oxen wallet private spend key (or seed phrase) to ANYONE else. "
-            "NEVER input your Oxen private spend key (or seed phrase) into any software or website other than the OFFICIAL "
-            "Oxen CLI or GUI wallets, downloaded directly from the Oxen GitHub (https://github.com/oxen-io/) or compiled from source.");
+    warn_msg_writer() << tr("NEVER give your Lozzax wallet private spend key (or seed phrase) to ANYONE else. "
+            "NEVER input your Lozzax private spend key (or seed phrase) into any software or website other than the OFFICIAL "
+            "Lozzax CLI or GUI wallets, downloaded directly from the Lozzax GitHub (https://github.com/lozzax/) or compiled from source.");
     std::string confirm = input_line(tr("Are you sure you want to access your private spend key?"), true);
     if (std::cin.eof() || !command_line::is_yes(confirm))
       return false;
@@ -2129,25 +2129,25 @@ bool simple_wallet::net_stats(const std::vector<std::string> &args)
 
 bool simple_wallet::welcome(const std::vector<std::string> &args)
 {
-  message_writer() << tr("Welcome to Oxen, the private cryptocurrency based on Monero");
+  message_writer() << tr("Welcome to Lozzax, the private cryptocurrency based on Monero");
   message_writer() << "";
-  message_writer() << tr("Oxen, like Bitcoin, is a cryptocurrency. That is, it is digital money.");
-  message_writer() << tr("Unlike Bitcoin, your Oxen transactions and balance stay private and are not visible to the world by default.");
+  message_writer() << tr("Lozzax, like Bitcoin, is a cryptocurrency. That is, it is digital money.");
+  message_writer() << tr("Unlike Bitcoin, your Lozzax transactions and balance stay private and are not visible to the world by default.");
   message_writer() << tr("However, you have the option of making those available to select parties if you choose to.");
   message_writer() << "";
-  message_writer() << tr("Oxen protects your privacy on the blockchain, and while Oxen strives to improve all the time,");
-  message_writer() << tr("no privacy technology can be 100% perfect, Monero and consequently Oxen included.");
-  message_writer() << tr("Oxen cannot protect you from malware, and it may not be as effective as we hope against powerful adversaries.");
-  message_writer() << tr("Flaws in Oxen may be discovered in the future, and attacks may be developed to peek under some");
-  message_writer() << tr("of the layers of privacy Oxen provides. Be safe and practice defense in depth.");
+  message_writer() << tr("Lozzax protects your privacy on the blockchain, and while Lozzax strives to improve all the time,");
+  message_writer() << tr("no privacy technology can be 100% perfect, Monero and consequently Lozzax included.");
+  message_writer() << tr("Lozzax cannot protect you from malware, and it may not be as effective as we hope against powerful adversaries.");
+  message_writer() << tr("Flaws in Lozzax may be discovered in the future, and attacks may be developed to peek under some");
+  message_writer() << tr("of the layers of privacy Lozzax provides. Be safe and practice defense in depth.");
   message_writer() << "";
-  message_writer() << tr("Welcome to Oxen and financial privacy. For more information, see https://oxen.io");
+  message_writer() << tr("Welcome to Lozzax and financial privacy. For more information, see https://oxen.io");
   return true;
 }
 
 bool simple_wallet::version(const std::vector<std::string> &args)
 {
-  message_writer() << "Oxen '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
+  message_writer() << "Lozzax '" << OXEN_RELEASE_NAME << "' (v" << OXEN_VERSION_FULL << ")";
   return true;
 }
 
@@ -2783,12 +2783,12 @@ simple_wallet::simple_wallet()
  refresh-from-block-height [n]
    Set the height before which to ignore blocks.
  segregate-pre-fork-outputs <1|0>
-   Set this if you intend to spend outputs on both Oxen AND a key reusing fork.
+   Set this if you intend to spend outputs on both Lozzax AND a key reusing fork.
  key-reuse-mitigation2 <1|0>
-   Set this if you are not sure whether you will spend on a key reusing Oxen fork later.
+   Set this if you are not sure whether you will spend on a key reusing Lozzax fork later.
  subaddress-lookahead <major>:<minor>
    Set the lookahead sizes for the subaddress hash table.
-   Set this if you are not sure whether you will spend on a key reusing Oxen fork later.
+   Set this if you are not sure whether you will spend on a key reusing Lozzax fork later.
  segregation-height <n>
    Set to the height of a key reusing fork you want to use, 0 to use default.
  ignore-outputs-above <amount>
@@ -3000,7 +3000,7 @@ Pending or Failed: "failed"|"pending",  "out", Lock, Checkpointed, Time, Amount*
   m_cmd_binder.set_handler("mms signer",
                            [this](const auto& x) { return mms(x); },
                            tr(USAGE_MMS_SIGNER),
-                           tr("Set or modify authorized signer info (single-word label, transport address, Oxen address), or list all signers"));
+                           tr("Set or modify authorized signer info (single-word label, transport address, Lozzax address), or list all signers"));
   m_cmd_binder.set_handler("mms list",
                            [this](const auto& x) { return mms(x); },
                            tr(USAGE_MMS_LIST),
@@ -3130,12 +3130,12 @@ Pending or Failed: "failed"|"pending",  "out", Lock, Checkpointed, Time, Amount*
   m_cmd_binder.set_cancel_handler([this] { return on_cancelled_command(); });
 
   //
-  // Oxen
+  // Lozzax
   //
   m_cmd_binder.set_handler("register_service_node",
                            [this](const auto& x) { return register_service_node(x); },
                            tr(USAGE_REGISTER_SERVICE_NODE),
-                           tr("Send <amount> to this wallet's main account and lock it as an operator stake for a new Service Node. This command is typically generated on the Service Node via the `prepare_registration' oxend command. The optional index= and <priority> parameters work as in the `transfer' command."));
+                           tr("Send <amount> to this wallet's main account and lock it as an operator stake for a new Service Node. This command is typically generated on the Service Node via the `prepare_registration' lozzaxd command. The optional index= and <priority> parameters work as in the `transfer' command."));
   m_cmd_binder.set_handler("stake",
                            [this](const auto& x) { return stake(x); },
                            tr(USAGE_STAKE),
@@ -3172,12 +3172,12 @@ Pending or Failed: "failed"|"pending",  "out", Lock, Checkpointed, Time, Amount*
   m_cmd_binder.set_handler("ons_by_owner",
                            [this](const auto& x) { return ons_by_owner(x); },
                            tr(USAGE_ONS_BY_OWNER),
-                           tr("Query the Oxen Name Service names that the keys have purchased. If no keys are specified, it defaults to the current wallet."));
+                           tr("Query the Lozzax Name Service names that the keys have purchased. If no keys are specified, it defaults to the current wallet."));
 
   m_cmd_binder.set_handler("ons_lookup",
                            [this](const auto& x) { return ons_lookup(x); },
                            tr(USAGE_ONS_LOOKUP),
-                           tr("Query the ed25519 public keys that own the Oxen Name System names."));
+                           tr("Query the ed25519 public keys that own the Lozzax Name System names."));
 
   m_cmd_binder.set_handler("ons_make_update_mapping_signature",
                            [this](const auto& x) { return ons_make_update_mapping_signature(x); },
@@ -3425,9 +3425,9 @@ void simple_wallet::print_seed(const epee::wipeable_string &seed)
     "Write them down and store them somewhere safe and secure. Please do not store them in "
     "your email or on file storage services outside of your immediate control.\n")) % (m_wallet->multisig() ? tr("string") : tr("25 words"));
 
-  warn_msg_writer() << tr("NEVER give your Oxen wallet seed to ANYONE else. NEVER input your Oxen "
-          "wallet seed into any software or website other than the OFFICIAL Oxen CLI or GUI wallets, "
-          "downloaded directly from the Oxen GitHub (https://github.com/oxen-io/) or compiled from source.");
+  warn_msg_writer() << tr("NEVER give your Lozzax wallet seed to ANYONE else. NEVER input your Lozzax "
+          "wallet seed into any software or website other than the OFFICIAL Lozzax CLI or GUI wallets, "
+          "downloaded directly from the Lozzax GitHub (https://github.com/lozzax) or compiled from source.");
   std::string confirm = input_line(tr("Are you sure you want to access your wallet seed?"), true);
   if (std::cin.eof() || !command_line::is_yes(confirm))
     return;
@@ -4072,7 +4072,7 @@ bool simple_wallet::init(const boost::program_options::variables_map& vm)
     bool ssl = false;
     if (m_wallet->check_connection(nullptr, &ssl) && !ssl)
       message_writer(epee::console_color_yellow, true) << tr("Using your own without SSL exposes your RPC traffic to monitoring");
-    message_writer(epee::console_color_yellow, true) << tr("You are strongly encouraged to connect to the Oxen network using your own daemon");
+    message_writer(epee::console_color_yellow, true) << tr("You are strongly encouraged to connect to the Lozzax network using your own daemon");
     message_writer(epee::console_color_yellow, true) << tr("If you or someone you trust are operating this daemon, you can use --trusted-daemon");
     message_writer();
 
@@ -4090,7 +4090,7 @@ bool simple_wallet::init(const boost::program_options::variables_map& vm)
   m_wallet->callback(this);
 
   if (welcome)
-    message_writer(epee::console_color_yellow, true) << tr("If you are new to Oxen, type \"welcome\" for a brief overview.");
+    message_writer(epee::console_color_yellow, true) << tr("If you are new to Lozzax, type \"welcome\" for a brief overview.");
 
   m_last_activity_time = time(NULL);
   return true;
@@ -4318,7 +4318,7 @@ std::optional<epee::wipeable_string> simple_wallet::new_wallet(const boost::prog
     "To start synchronizing with the daemon, use the \"refresh\" command.\n"
     "Use the \"help\" command to see the list of available commands.\n"
     "Use \"help <command>\" to see a command's documentation.\n"
-    "Always use the \"exit\" command when closing oxen-wallet-cli to save \n"
+    "Always use the \"exit\" command when closing lozzax-wallet-cli to save \n"
     "your current session's state. Otherwise, you might need to synchronize \n"
     "your wallet again (your wallet keys are NOT at risk in any case).\n")
   ;
@@ -5649,7 +5649,7 @@ void simple_wallet::check_for_inactivity_lock(bool user)
         tools::msg_writer() << R"(
       ...........
     ...............
-  ....OOOOOOOOOOO....   Your Oxen Wallet was locked to
+  ....OOOOOOOOOOO....   Your Lozzax Wallet was locked to
  .......OOOOOOO.......  protect you while you were away.
  ..........O..........
  .......OOOOOOO.......  (Use `set inactivity-lock-timeout 0`
@@ -5962,7 +5962,7 @@ bool simple_wallet::transfer_main(Transfer transfer_type, const std::vector<std:
     }
     else
     {
-      if (boost::starts_with(local_args[i], "oxen:"))
+      if (boost::starts_with(local_args[i], "lozzax:"))
         fail_msg_writer() << tr("Invalid last argument: ") << local_args.back() << ": " << error;
       else
         fail_msg_writer() << tr("Invalid last argument: ") << local_args.back();
@@ -6533,7 +6533,7 @@ bool simple_wallet::ons_buy_mapping(std::vector<std::string> args)
     info.is_subaddress                  = m_current_subaddress_account != 0;
     dsts.push_back(info);
 
-    std::cout << std::endl << tr("Buying Oxen Name System Record") << std::endl << std::endl;
+    std::cout << std::endl << tr("Buying Lozzax Name System Record") << std::endl << std::endl;
     if (*type == ons::mapping_type::session)
       std::cout << boost::format(tr("Session Name: %s")) % name << std::endl;
     else if (*type == ons::mapping_type::wallet)
@@ -6631,7 +6631,7 @@ bool simple_wallet::ons_renew_mapping(std::vector<std::string> args)
     info.is_subaddress                  = m_current_subaddress_account != 0;
     dsts.push_back(info);
 
-    std::cout << "\n" << tr("Renew Oxen Name System Record") << "\n\n";
+    std::cout << "\n" << tr("Renew Lozzax Name System Record") << "\n\n";
     if (ons::is_lokinet_type(type))
       std::cout << boost::format(tr("Lokinet Name:  %s")) % name << "\n";
     else
@@ -6713,8 +6713,8 @@ bool simple_wallet::ons_update_mapping(std::vector<std::string> args)
     auto& enc_hex = response[0].encrypted_value;
     if (!oxenmq::is_hex(enc_hex) || enc_hex.size() % 2 != 0 || enc_hex.size() > 2*ons::mapping_value::BUFFER_SIZE)
     {
-      LOG_ERROR("invalid ONS data returned from oxend");
-      fail_msg_writer() << tr("invalid ONS data returned from oxend");
+      LOG_ERROR("invalid ONS data returned from lozzaxd");
+      fail_msg_writer() << tr("invalid ONS data returned from lozzaxd");
       return true;
     }
 
@@ -6735,7 +6735,7 @@ bool simple_wallet::ons_update_mapping(std::vector<std::string> args)
     info.is_subaddress                  = m_current_subaddress_account != 0;
     dsts.push_back(info);
 
-    std::cout << std::endl << tr("Updating Oxen Name System Record") << std::endl << std::endl;
+    std::cout << std::endl << tr("Updating Lozzax Name System Record") << std::endl << std::endl;
     if (type == ons::mapping_type::session)
       std::cout << boost::format(tr("Session Name:     %s")) % name << std::endl;
     else if (ons::is_lokinet_type(type))
@@ -6955,7 +6955,7 @@ bool simple_wallet::ons_lookup(std::vector<std::string> args)
     auto& enc_hex = mapping.encrypted_value;
     if (mapping.entry_index >= args.size() || !oxenmq::is_hex(enc_hex) || enc_hex.size() % 2 != 0 || enc_hex.size() > 2*ons::mapping_value::BUFFER_SIZE)
     {
-      fail_msg_writer() << "Received invalid ONS mapping data from oxend";
+      fail_msg_writer() << "Received invalid ONS mapping data from lozzaxd";
       return false;
     }
 
@@ -10189,7 +10189,7 @@ void simple_wallet::interrupt()
 void simple_wallet::commit_or_save(std::vector<tools::wallet2::pending_tx>& ptx_vector, bool do_not_relay, bool blink)
 {
   size_t i = 0;
-  std::string msg_buf; // NOTE(oxen): Buffer output so integration tests read the entire output
+  std::string msg_buf; // NOTE(lozzax): Buffer output so integration tests read the entire output
   msg_buf.reserve(128);
 
   while (!ptx_vector.empty())
@@ -10272,13 +10272,13 @@ int main(int argc, char* argv[])
 
   auto [vm, should_terminate] = wallet_args::main(
    argc, argv,
-   "oxen-wallet-cli [--wallet-file=<filename>|--generate-new-wallet=<filename>] [<COMMAND>]",
-    sw::tr("This is the command line Oxen wallet. It needs to connect to a Oxen\ndaemon to work correctly.\n\nWARNING: Do not reuse your Oxen keys on a contentious fork, doing so will harm your privacy.\n Only consider reusing your key on a contentious fork if the fork has key reuse mitigations built in."),
+   "lozzax-wallet-cli [--wallet-file=<filename>|--generate-new-wallet=<filename>] [<COMMAND>]",
+    sw::tr("This is the command line Lozzax wallet. It needs to connect to a Lozzax\ndaemon to work correctly.\n\nWARNING: Do not reuse your Lozzax keys on a contentious fork, doing so will harm your privacy.\n Only consider reusing your key on a contentious fork if the fork has key reuse mitigations built in."),
     desc_params,
     hidden_params,
     positional_options,
     [](const std::string &s, bool emphasis){ tools::scoped_message_writer(emphasis ? epee::console_color_white : epee::console_color_default, true) << s; },
-    "oxen-wallet-cli.log"
+    "lozzax-wallet-cli.log"
   );
 
   if (!vm)
@@ -10455,7 +10455,7 @@ void simple_wallet::list_mms_messages(const std::vector<mms::message> &messages)
 void simple_wallet::list_signers(const std::vector<mms::authorized_signer> &signers)
 {
   message_writer() << boost::format("%2s %-20s %-s") % tr("#") % tr("Label") % tr("Transport Address");
-  message_writer() << boost::format("%2s %-20s %-s") % "" % tr("Auto-Config Token") % tr("Oxen Address");
+  message_writer() << boost::format("%2s %-20s %-s") % "" % tr("Auto-Config Token") % tr("Lozzax Address");
   for (size_t i = 0; i < signers.size(); ++i)
   {
     const mms::authorized_signer &signer = signers[i];
@@ -10680,14 +10680,14 @@ void simple_wallet::mms_signer(const std::vector<std::string> &args)
     bool ok = cryptonote::get_account_address_from_str_or_url(info, m_wallet->nettype(), args[3], oa_prompter);
     if (!ok)
     {
-      fail_msg_writer() << tr("Invalid Oxen address");
+      fail_msg_writer() << tr("Invalid Lozzax address");
       return;
     }
     monero_address = info.address;
     const std::vector<mms::message> &messages = ms.get_all_messages();
     if ((messages.size() > 0) || state.multisig)
     {
-      fail_msg_writer() << tr("Wallet state does not allow changing Oxen addresses anymore");
+      fail_msg_writer() << tr("Wallet state does not allow changing Lozzax addresses anymore");
       return;
     }
   }

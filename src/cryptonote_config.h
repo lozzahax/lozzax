@@ -45,7 +45,7 @@ using namespace std::literals;
 #define CRYPTONOTE_MAX_TX_SIZE                          1000000
 #define CRYPTONOTE_MAX_TX_PER_BLOCK                     0x10000000
 #define CRYPTONOTE_PUBLIC_ADDRESS_TEXTBLOB_VER          0
-#define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            30
+#define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            60
 #define CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V2           60*10
 #define CRYPTONOTE_DEFAULT_TX_SPENDABLE_AGE             10
 #define CRYPTONOTE_DEFAULT_TX_MIXIN                     9
@@ -157,7 +157,7 @@ constexpr uint64_t BLOCKS_EXPECTED_IN_YEARS(int years) { return BLOCKS_EXPECTED_
 #define P2P_SUPPORT_FLAG_FLUFFY_BLOCKS                  0x01
 #define P2P_SUPPORT_FLAGS                               P2P_SUPPORT_FLAG_FLUFFY_BLOCKS
 
-#define CRYPTONOTE_NAME                         "oxen"
+#define CRYPTONOTE_NAME                         "lozzax"
 #define CRYPTONOTE_POOLDATA_FILENAME            "poolstate.bin"
 #define CRYPTONOTE_BLOCKCHAINDATA_FILENAME      "data.mdb"
 #define CRYPTONOTE_BLOCKCHAINDATA_LOCK_FILENAME "lock.mdb"
@@ -219,21 +219,21 @@ namespace config
   inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 114;
   inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 115;
   inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 116;
-  inline constexpr uint16_t P2P_DEFAULT_PORT = 22022;
-  inline constexpr uint16_t RPC_DEFAULT_PORT = 22023;
-  inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 22024;
-  inline constexpr uint16_t QNET_DEFAULT_PORT = 22025;
+  inline constexpr uint16_t P2P_DEFAULT_PORT = 22122;
+  inline constexpr uint16_t RPC_DEFAULT_PORT = 22123;
+  inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 22124;
+  inline constexpr uint16_t QNET_DEFAULT_PORT = 22125;
   inline constexpr boost::uuids::uuid const NETWORK_ID = { {
-        0x46 ,0x61, 0x72, 0x62 ,0x61, 0x75, 0x74, 0x69, 0x2a, 0x4c, 0x61, 0x75, 0x66, 0x65, 0x79
+        0x44 ,0x69, 0x76, 0x68 ,0x62, 0x78, 0x71, 0x57, 0x2a, 0x4c, 0x65, 0x78, 0x68, 0x69, 0x59
     } }; // Bender's nightmare
-  inline constexpr std::string_view GENESIS_TX = "021e01ff000380808d93f5d771027c4fd4553bc9886f1f49e3f76d945bf71e8632a94e6c177b19cbc780e7e6bdb48080b4ccd4dfc60302c8b9f6461f58ef3f2107e577c7425d06af584a1c7482bf19060e84059c98b4c3808088fccdbcc32302732b53b0b0db706fcc3087074fb4b786da5ab72b2065699f9453448b0db27f892101ed71f2ce3fc70d7b2036f8a4e4b3fb75c66c12184b55a908e7d1a1d6995566cf00"sv;
+  inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
   inline constexpr uint32_t GENESIS_NONCE = 1022201;
 
   inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = BLOCKS_EXPECTED_IN_DAYS(7);
   inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
   {
-    "LCFxT37LAogDn1jLQKf4y7aAqfi21DjovX9qyijaLYQSdrxY1U5VGcnMJMjWrD9RhjeK5Lym67wZ73uh9AujXLQ1RKmXEyL"sv, // hardfork v7-10
-    "LDBEN6Ut4NkMwyaXWZ7kBEAx8X64o6YtDhLXUP26uLHyYT4nFmcaPU2Z2fauqrhTLh4Qfr61pUUZVLaTHqAdycETKM1STrz"sv, // hardfork v11
+    "L8MgeJKvjbDMzpjXFtvoXc5hnpYPn839HhAftehBJ6eETSvCx747yTY1JJB3uWxABPQLn8rNXoxepPyAj6VuBkbx8nWx9iq"sv, // hardfork v7-10
+    "L8MgeJKvjbDMzpjXFtvoXc5hnpYPn839HhAftehBJ6eETSvCx747yTY1JJB3uWxABPQLn8rNXoxepPyAj6VuBkbx8nWx9iq"sv, // hardfork v11
   };
 
   inline constexpr auto UPTIME_PROOF_TOLERANCE = 5min; // How much an uptime proof timestamp can deviate from our timestamp before we refuse it
@@ -264,21 +264,21 @@ namespace config
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 156;
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 157;
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 158;
-    inline constexpr uint16_t P2P_DEFAULT_PORT = 38156;
-    inline constexpr uint16_t RPC_DEFAULT_PORT = 38157;
-    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 38158;
-    inline constexpr uint16_t QNET_DEFAULT_PORT = 38159;
+    inline constexpr uint16_t P2P_DEFAULT_PORT = 38056;
+    inline constexpr uint16_t RPC_DEFAULT_PORT = 38057;
+    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 38058;
+    inline constexpr uint16_t QNET_DEFAULT_PORT = 38059;
     inline constexpr boost::uuids::uuid const NETWORK_ID = { {
-        0x5f, 0x3a, 0x78, 0x65, 0xe1, 0x6f, 0xca, 0xb8, 0x02, 0xa1, 0xdc, 0x17, 0x61, 0x64, 0x15, 0xbe,
+        0x5f, 0x3a, 0x44, 0x55, 0xe1, 0x6f, 0xca, 0xb8, 0x07, 0xa1, 0xdc, 0x57, 0x21, 0x34, 0x45, 0xbe,
       } }; // Bender's daydream
-    inline constexpr std::string_view GENESIS_TX = "03011e001e01ff00018080c9db97f4fb270259b546996f69aa71abe4238995f41d780ab1abebcac9f00e808f147bdb9e3228420112573af8c309b69a1a646f41b5212ba7d9c4590bf86e04f36c486467cfef9d3d72000000000000000000000000000000000000000000000000000000000000000000"sv;
+    inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
     inline constexpr uint32_t GENESIS_NONCE = 10001;
 
     inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = 1000;
     inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
     {
-      "T6SUprTYE5rQpep9iQFxyPcKVd91DFR1fQ1Qsyqp5eYLiFc8XuYd3reRE71qDL8c3DXioUbDEpDFdaUpetnL37NS1R3rzoKxi"sv, // hardfork v7-9
-      "T6TzkJb5EiASaCkcH7idBEi1HSrpSQJE1Zq3aL65ojBMPZvqHNYPTL56i3dncGVNEYCG5QG5zrBmRiVwcg6b1cRM1SRNqbp44"sv, // hardfork v10
+      "T6TvA6P7M7pHFttLgMPreFdiTkDPsgDr8Ge5rZikjseEUvoxG3PXyAn8r79vzRH8UR4o7WoQ5By7zEcwoopPykNw1CA6jktJL"sv, // hardfork v7-9
+      "T6TvA6P7M7pHFttLgMPreFdiTkDPsgDr8Ge5rZikjseEUvoxG3PXyAn8r79vzRH8UR4o7WoQ5By7zEcwoopPykNw1CA6jktJL"sv, // hardfork v10
     };
 
     // Testnet uptime proofs are 6x faster than mainnet (devnet config also uses these)
@@ -293,14 +293,14 @@ namespace config
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 3930; // ~ dV1 .. dV3
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 4442; // ~ dVA .. dVC
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 5850; // ~dVa .. dVc
-    inline constexpr uint16_t P2P_DEFAULT_PORT = 38856;
-    inline constexpr uint16_t RPC_DEFAULT_PORT = 38857;
-    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 38858;
-    inline constexpr uint16_t QNET_DEFAULT_PORT = 38859;
+    inline constexpr uint16_t P2P_DEFAULT_PORT = 38156;
+    inline constexpr uint16_t RPC_DEFAULT_PORT = 38157;
+    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 38158;
+    inline constexpr uint16_t QNET_DEFAULT_PORT = 38159;
     inline constexpr boost::uuids::uuid const NETWORK_ID = { {
-        0xa9, 0xf7, 0x5c, 0x7d, 0x55, 0x17, 0xcb, 0x6b, 0x5b, 0xf4, 0x63, 0x79, 0x7a, 0x57, 0xab, 0xd3
+        0xa9, 0xf7, 0x5c, 0x7d, 0x15, 0x47, 0xcb, 0x6b, 0x5b, 0xf4, 0x23, 0x19, 0x7a, 0x27, 0xab, 0xd3
       } };
-    inline constexpr std::string_view GENESIS_TX = "04011e1e01ff00018080c9db97f4fb2702fa27e905f604faa4eb084ee675faca77b0cfea9adec1526da33cae5e286f31624201dae05bf3fa1662b7fd373c92426763d921cf3745e10ee43edb510f690c656f247200000000000000000000000000000000000000000000000000000000000000000000"sv;
+    inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff0302df5d56da0c7d643ddd1ce61901c7bdc5fb1738bfe39fbe69c28a3a7032729c0f2101168d0c4ca86fb55a4cf6a36d31431be1c53a3bd7411bb24e8832410289fa6f3b"sv;
     inline constexpr uint32_t GENESIS_NONCE = 12345;
 
     inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = BLOCKS_EXPECTED_IN_DAYS(7);
@@ -332,7 +332,7 @@ namespace cryptonote
     network_version_9_service_nodes, // Proof Of Stake w/ Service Nodes
     network_version_10_bulletproofs, // Bulletproofs, Service Node Grace Registration Period, Batched Governance
     network_version_11_infinite_staking, // Infinite Staking, CN-Turtle
-    network_version_12_checkpointing, // Checkpointing, Relaxed Deregistration, RandomXL, Oxen Storage Server
+    network_version_12_checkpointing, // Checkpointing, Relaxed Deregistration, RandomXL, Lozzax Storage Server
     network_version_13_enforce_checkpoints,
     network_version_14_blink,
     network_version_15_ons,

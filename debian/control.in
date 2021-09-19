@@ -24,24 +24,24 @@ Description: Oxen wallet shared libraries
  This package contains the common Oxen library code used by the various Oxen
  wallet-related code.
 
-Package: oxend
+Package: lozzaxd
 Architecture: any
 Depends: liboxen@LIBOXEN_VERSION@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, debconf
 Suggests: oxen-blockchain-tools, oxen-wallet-cli
 Replaces: lokid (<< 8.1.5-1~)
 Breaks: lokid (<< 8.1.5-1~)
 Description: Oxen network daemon
- This package contains the Oxen network daemon, oxend, for running an Oxen node
+ This package contains the Oxen network daemon, lozzaxd, for running an Oxen node
  or Oxen service node.
 
 Package: lokid
-Depends: oxend, ${misc:Depends}
+Depends: lozzaxd, ${misc:Depends}
 Architecture: all
 Section: oldlibs
 Description: transitional package
  Transitional package for LOKI to OXEN rename.
  .
- This package provides the lokid -> oxend compatibility symlink for
+ This package provides the lokid -> lozzaxd compatibility symlink for
  transitional purposes.  It can be safely removed if the lokid symlink is no
  longer needed.
 
@@ -49,15 +49,15 @@ Package: oxen-wallet-cli
 Architecture: any
 Depends: liboxen-wallet@LIBOXEN_VERSION@ (= ${binary:Version}), liboxen@LIBOXEN_VERSION@ (= ${binary:Version}),
     ${shlibs:Depends}, ${misc:Depends}
-Suggests: oxend
+Suggests: lozzaxd
 Replaces: loki-wallet-cli (<< 8.1.5-1~)
 Breaks: loki-wallet-cli (<< 8.1.5-1~)
 Description: Oxen command-line wallet and JSON RPC wallet
  This package contains the Oxen command-line wallet for accessing a wallet
  stored on the Oxen blockchain.
  .
- The wallets require a oxend node to work, such as the one provided in the
- oxend package, but can also work with a remote Oxen node.
+ The wallets require a lozzaxd node to work, such as the one provided in the
+ lozzaxd package, but can also work with a remote Oxen node.
 
 Package: loki-wallet-cli
 Depends: oxen-wallet-cli, ${misc:Depends}
@@ -74,7 +74,7 @@ Package: oxen-wallet-rpc
 Architecture: any
 Depends: liboxen-wallet@LIBOXEN_VERSION@ (= ${binary:Version}), liboxen@LIBOXEN_VERSION@ (= ${binary:Version}),
     ${shlibs:Depends}, ${misc:Depends}
-Suggests: oxend
+Suggests: lozzaxd
 Replaces: loki-wallet-rpc (<< 8.1.5-1~)
 Breaks: loki-wallet-rpc (<< 8.1.5-1~)
 Description: Oxen RPC wallet
@@ -82,8 +82,8 @@ Description: Oxen RPC wallet
  on the Oxen blockchain.  This wallet interface is typically used by external
  software that needs to interact with a wallet.
  .
- The wallet requires a oxend node to work, such as the one provided in the
- oxend package, but can also work with a remote Oxen node.
+ The wallet requires a lozzaxd node to work, such as the one provided in the
+ lozzaxd package, but can also work with a remote Oxen node.
 
 Package: loki-wallet-rpc
 Depends: oxen-wallet-rpc, ${misc:Depends}
@@ -100,12 +100,12 @@ Package: oxen-blockchain-tools
 Architecture: any
 Depends: liboxen-wallet@LIBOXEN_VERSION@ (= ${binary:Version}), liboxen@LIBOXEN_VERSION@ (= ${binary:Version}),
     ${shlibs:Depends}, ${misc:Depends}
-Recommends: oxend
+Recommends: lozzaxd
 Replaces: loki-blockchain-tools (<< 8.1.5-1~)
 Breaks: loki-blockchain-tools (<< 8.1.5-1~)
 Description: Oxen blockchain utilities
  This contains the oxen-blockchain-* binaries for managing and querying the
- oxend blockchain database.  These tools are used for blockchain diagnostics
+ lozzaxd blockchain database.  These tools are used for blockchain diagnostics
  and are not typically needed to run an ordinary node or service node.
 
 Package: loki-blockchain-tools
@@ -142,12 +142,12 @@ Description: transitional package
 Package: oxen-service-node
 Architecture: all
 Pre-Depends: curl
-Depends: oxend (=${binary:Version}), oxen-storage-server (>= 2.1.1), lokinet-router (>= 0.9.3), ucf
+Depends: lozzaxd (=${binary:Version}), oxen-storage-server (>= 2.1.1), lokinet-router (>= 0.9.3), ucf
 Replaces: loki-service-node (<< 8.1.5-1~)
 Breaks: loki-service-node (<< 8.1.5-1~)
 Description: Oxen service node metapackage
  This package depends on the necessary components to run a oxen service node
- and updates the oxend configuration to operate as a service node instead of a
+ and updates the lozzaxd configuration to operate as a service node instead of a
  regular node.
 
 Package: loki-service-node

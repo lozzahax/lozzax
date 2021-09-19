@@ -28,7 +28,7 @@ oxen (9.2.0-1~ubuntu1804) bionic; urgency=medium
 oxen (9.1.3-1~ubuntu1804) bionic; urgency=medium
 
   [ Chris Buccella ]
-  * Bump version used in oxend dockerfile to 9.1.0
+  * Bump version used in lozzaxd dockerfile to 9.1.0
 
   [ Jason Rhinelander ]
   * Update codename
@@ -233,11 +233,11 @@ oxen (9.1.0-1~ubuntu1804) bionic; urgency=medium
   * Add state_change compilation in test suite
   * Invert and/or logic for reason codes
   * Expose reasons in rpc tx_extra details
-  * Show decomm reasons in `oxend status`
+  * Show decomm reasons in `lozzaxd status`
   * Fix RPC to return coded strings, not readable; shorten codes
 
   [ Chris Buccella ]
-  * Add oxend Dockerfile and build script
+  * Add lozzaxd Dockerfile and build script
 
   [ Sean Darcy ]
   * Test suite fix for HF18

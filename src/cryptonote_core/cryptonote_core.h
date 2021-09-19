@@ -1007,7 +1007,7 @@ namespace cryptonote
      bool relay_txpool_transactions();
 
      /**
-      * @brief returns the oxend config directory
+      * @brief returns the lozzaxd config directory
       */
      const fs::path& get_config_directory() const { return m_config_folder; }
 

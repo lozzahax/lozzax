@@ -218,7 +218,7 @@ namespace service_nodes {
   struct proof_version
   {
     std::pair<uint8_t, uint8_t> hardfork_revision;
-    std::array<uint16_t, 3> oxend;
+    std::array<uint16_t, 3> lozzaxd;
     std::array<uint16_t, 3> lokinet;
     std::array<uint16_t, 3> storage_server;
   };

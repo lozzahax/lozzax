@@ -1,0 +1,73 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    # Create _loki user if it doesn't exist
+    if ! getent passwd _loki >/dev/null; then
+        adduser --force-badname --system --quiet --home /var/lib/oxen --group --gecos "Oxen node" _loki
+    fi
+    # Make sure the group gets created (in case _loki was preexisting)
+    if ! getent group _loki >/dev/null; then
+        addgroup --force-badname --system --quiet _loki
+    fi
+    # Make sure the _loki user is part of the _loki group
+    if ! id -Gn _loki | grep -qw _loki; then
+        adduser --force-badname --quiet _loki _loki
+    fi
+
+    # Create and chown /var/{lib,log}/oxen
+    for d in lib log; do
+        if ! [ -d /var/$d/oxen ]; then
+            if [ -d /var/$d/loki ]; then
+                # Symlink for migration from /var/{lib,log}/loki -> /var/{lib,log}/oxen
+                ln -s loki /var/$d/oxen
+            else
+                mkdir -p /var/$d/oxen
+            fi
+        fi
+
+        su -s /bin/sh _loki -c "test -O /var/$d/oxen &&
+            test -G /var/$d/oxen" || \
+            chown _loki:_loki /var/$d/oxen
+    done
+
+    # Make /var/lib/loki -> oxen compatibility symlink (lokinet, at least, still depends on
+    # this)
+    if ! [ -d /var/lib/loki ] && ! [ -h /var/lib/loki ] && [ -d /var/lib/oxen ]; then
+        ln -s oxen /var/lib/loki
+    fi
+
+    # If this is a new install then see if we also have a lokid package installed: if so then we
+    # have to deal with the service rename by copying the loki-node enabled status into the
+    # oxen-node enabled status so that the new oxen-node.service file ends up in the right state
+    # (i.e. not enabled if loki-node.service wasn't enabled).
+    if [ -z "$2" ] && [ -f /var/lib/dpkg/info/lokid.list ]; then
+        # Enabled by default, so disable if the old one was not enabled:
+        if ! deb-systemd-helper --quiet was-enabled loki-node.service; then
+            # The enable-disable is a bit weird, but the first "d-s-h enable" call does
+            # initialization so we have to flip it on and off again to make d-s-h realize that it
+            # was explicitly disabled when it tries to call d-s-h enable again in the automatic
+            # debhelper scripts, below:
+            deb-systemd-helper enable oxen-node.service
+            deb-systemd-helper disable oxen-node.service
+        fi
+
+        # Disabled by default, so enable only if the old one was enabled:
+        if deb-systemd-helper --quiet was-enabled loki-testnet-node.service; then
+            deb-systemd-helper enable oxen-testnet-node.service
+        fi
+    fi
+fi
+
+#DEBHELPER#
+
+# Also restart the oxen-nodes.target (from oxen-multi-sn) on upgrade if it is active
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+    if [ -n "$2" ] && [ -d /run/systemd/system ]; then
+        systemctl --system daemon-reload >/dev/null || true
+        if systemctl --quiet is-active oxen-nodes.target; then
+            deb-systemd-invoke restart oxen-nodes.target >/dev/null || true
+        fi
+    fi
+fi

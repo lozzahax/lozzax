@@ -308,7 +308,7 @@ bool Blockchain::load_missing_blocks_into_oxen_subsystems()
   int64_t const total_blocks = static_cast<int64_t>(end_height) - static_cast<int64_t>(start_height);
   if (total_blocks <= 0) return true;
   if (total_blocks > 1)
-    MGINFO("Loading blocks into oxen subsystems, scanning blockchain from height: " << start_height << " to: " << end_height << " (snl: " << snl_height << ", ons: " << ons_height << ")");
+    MGINFO("Loading blocks into lozzax subsystems, scanning blockchain from height: " << start_height << " to: " << end_height << " (snl: " << snl_height << ", ons: " << ons_height << ")");
 
   using clock                   = std::chrono::steady_clock;
   using work_time               = std::chrono::duration<float>;
@@ -347,7 +347,7 @@ bool Blockchain::load_missing_blocks_into_oxen_subsystems()
     uint64_t height = start_height + (index * BLOCK_COUNT);
     if (!get_blocks_only(height, static_cast<uint64_t>(BLOCK_COUNT), blocks))
     {
-      LOG_ERROR("Unable to get checkpointed historical blocks for updating oxen subsystems");
+      LOG_ERROR("Unable to get checkpointed historical blocks for updating lozzax subsystems");
       return false;
     }
 
@@ -3964,19 +3964,6 @@ Blockchain::block_pow_verified Blockchain::verify_block_pow(cryptonote::block co
   crypto::hash const blk_hash = cryptonote::get_block_hash(blk);
   uint64_t const blk_height   = cryptonote::get_block_height(blk);
 
-  // There is a difficulty bug in oxend that caused a network disagreement at height 526483 where
-  // somewhere around half the network had a slightly-too-high difficulty value and accepted the
-  // block while nodes with the correct difficulty value rejected it.  However this not-quite-enough
-  // difficulty chain had enough of the network following it that it got checkpointed several times
-  // and so cannot be rolled back.
-  //
-  // Hence this hack: starting at that block until the next hard fork, we allow a slight grace
-  // (0.2%) on the required difficulty (but we don't *change* the actual difficulty value used for
-  // diff calculation).
-  if (cryptonote::get_block_height(blk) >= 526483 && get_network_version() < network_version_16_pulse)
-    difficulty = (difficulty * 998) / 1000;
-
-  CHECK_AND_ASSERT_MES(difficulty, result, "!!!!!!!!! difficulty overhead !!!!!!!!!");
   if (alt_block)
   {
     randomx_longhash_context randomx_context = {};

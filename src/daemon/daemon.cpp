@@ -146,7 +146,7 @@ daemon::daemon(boost::program_options::variables_map vm_) :
   std::vector<std::tuple<std::string, uint16_t, bool>> rpc_listen_admin, rpc_listen_public;
   if (deprecated_rpc_options)
   {
-    MGINFO_RED(deprecated_option_names << " options are deprecated and will be removed from a future oxend version; use --rpc-public/--rpc-admin instead");
+    MGINFO_RED(deprecated_option_names << " options are deprecated and will be removed from a future lozzaxd version; use --rpc-public/--rpc-admin instead");
 
     // These old options from Monero are really janky: --restricted-rpc turns the main port
     // restricted, but then we also have --rpc-restricted-bind-port but both are stuck with
@@ -298,7 +298,7 @@ bool daemon::run(bool interactive)
 
   try
   {
-    MGINFO_BLUE("Starting up oxend services...");
+    MGINFO_BLUE("Starting up lozzaxd services...");
     cryptonote::GetCheckpointsCallback get_checkpoints;
 #if defined(PER_BLOCK_CHECKPOINT)
     get_checkpoints = blocks::GetCheckpointsData;
@@ -307,7 +307,7 @@ bool daemon::run(bool interactive)
     if (!core->init(vm, nullptr, get_checkpoints))
       throw std::runtime_error("Failed to start core");
 
-    MGINFO("Starting OxenMQ");
+    MGINFO("Starting LozzaxMQ");
     omq_rpc = std::make_unique<cryptonote::rpc::omq_rpc>(*core, *rpc, vm);
     core->start_oxenmq();
 

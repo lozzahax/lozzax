@@ -29,7 +29,7 @@ Description: Retry IP address entry/lookup?
  .
  Do you want to go back and enter an IP manually (or try automatic lookup
  again)?  Note that if you say no here you will have to update the
- /etc/oxen/oxen.conf (or testnet.conf) files yourself with the IP before oxend
+ /etc/oxen/oxen.conf (or testnet.conf) files yourself with the IP before lozzaxd
  will start properly.
 
 Template: oxen-service-node/invalid-ip
@@ -40,5 +40,5 @@ Description: Retry IP address entry?
  .
  You entered an invalid IPv4 address.  Choose yes here to return to the IP
  entry dialog and try again (or to use the automatic lookup service).  If you
- say no here your oxend will not start until you manually update the
+ say no here your lozzaxd will not start until you manually update the
  /etc/oxen/oxen.conf (or testnet.conf) file yourself with a valid public IP.
