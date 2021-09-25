@@ -2346,14 +2346,14 @@ namespace cryptonote
           {
             MGINFO_RED(
                 "Failed to submit uptime proof: have not heard from the storage server recently. Make sure that it "
-                "is running! It is required to run alongside the Loki daemon");
+                "is running! It is required to run alongside the Lozzax daemon");
             return;
           }
           if (!check_external_ping(m_last_lokinet_ping, get_net_config().UPTIME_PROOF_FREQUENCY, "Lokinet"))
           {
             MGINFO_RED(
                 "Failed to submit uptime proof: have not heard from lokinet recently. Make sure that it "
-                "is running! It is required to run alongside the Loki daemon");
+                "is running! It is required to run alongside the Lozzax daemon");
             return;
           }
         }

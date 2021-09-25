@@ -227,7 +227,7 @@ namespace config
         0x44 ,0x69, 0x76, 0x68 ,0x62, 0x78, 0x71, 0x57, 0x2a, 0x4c, 0x65, 0x78, 0x68, 0x69, 0x59
     } }; // Bender's nightmare
   inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
-  inline constexpr uint32_t GENESIS_NONCE = 1022201;
+  inline constexpr uint32_t GENESIS_NONCE = 120;
 
   inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = BLOCKS_EXPECTED_IN_DAYS(7);
   inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
@@ -272,7 +272,7 @@ namespace config
         0x5f, 0x3a, 0x44, 0x55, 0xe1, 0x6f, 0xca, 0xb8, 0x07, 0xa1, 0xdc, 0x57, 0x21, 0x34, 0x45, 0xbe,
       } }; // Bender's daydream
     inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
-    inline constexpr uint32_t GENESIS_NONCE = 10001;
+    inline constexpr uint32_t GENESIS_NONCE = 120;
 
     inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = 1000;
     inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
