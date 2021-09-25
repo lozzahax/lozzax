@@ -19,14 +19,14 @@ uint64_t get_staking_requirement(cryptonote::network_type nettype, uint64_t heig
       return COIN * 100;
 
   if (is_hard_fork_at_least(nettype, cryptonote::network_version_16_pulse, height))
-    return 150000'000000000;
+    return 25000'000000000;
 
   if (is_hard_fork_at_least(nettype, cryptonote::network_version_13_enforce_checkpoints, height))
   {
     constexpr int64_t heights[] = {
-        500,
-        510,
-        520,
+        170,
+        172,
+        177,
     };
 
     constexpr int64_t lsr[] = {

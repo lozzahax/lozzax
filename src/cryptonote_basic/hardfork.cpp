@@ -35,26 +35,36 @@ namespace cryptonote {
 // version 7 from the start of the blockchain, inhereted from Monero mainnet
 static constexpr std::array mainnet_hard_forks =
 {
-  hard_fork{7,  0,      0, 1503046577 },
-  hard_fork{8,  0,    643, 1632041429 },
-  hard_fork{9,  0,    800, 1632045029 },
-  hard_fork{18, 1,   1000, 1632048629 },
+  hard_fork{7,    0,       0, 1503046577 },
+  hard_fork{8,    0,      10, 1632426903 },
+  hard_fork{9,    0,     120, 1632428703 },
+  hard_fork{10,   0,     140, 1632428943 },
+  hard_fork{11,   0,     150, 1632429243 },
+  hard_fork{12,   0,     160, 1632429363 },
+  hard_fork{13,   0,     170, 1632429603 },
+  hard_fork{14,   0,     180, 1632429843 },
+  hard_fork{15,   0,     200, 1632430203 },
+  hard_fork{16,   0,     250, 1632430683 },
+  hard_fork{17,   0,     300, 1632431103 },
+  hard_fork{18,   1,     500, 1632432603 },
 };
 
 static constexpr std::array testnet_hard_forks =
 {
-  hard_fork{7,  0,      0, 1503046577 },
-  hard_fork{8,  0,    643, 1632041429 },
-  hard_fork{9,  0,    800, 1632045029 },
-  hard_fork{18, 1,   1000, 1632048629 },
+  hard_fork{7,   0,      0, 1503046577 },
+  hard_fork{8,   0,   1000, 1632041429 },
+  hard_fork{13,  0,   1200, 1632045029 },
+  hard_fork{15,  0,   1300, 1632048629 },
+  hard_fork{18,  1,   1400, 1632048629 },
 };
 
 static constexpr std::array devnet_hard_forks =
 {
-  hard_fork{7,  0,      0, 1503046577 },
-  hard_fork{8,  0,    643, 1632041429 },
-  hard_fork{9,  0,    800, 1632045029 },
-  hard_fork{18, 1,   1000, 1632048629 },
+  hard_fork{7,   0,      0, 1503046577 },
+  hard_fork{8,   0,   1000, 1632041429 },
+  hard_fork{13,  0,   1200, 1632045029 },
+  hard_fork{15,  0,   1300, 1632048629 },
+  hard_fork{18,  1,   1400, 1632048629 },
 };
 
 
